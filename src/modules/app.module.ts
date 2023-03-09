@@ -12,6 +12,7 @@ const validateConfig = Joi.object({
   ALCHEMY_API_KEY: Joi.string().required(),
   ETHERSCAN_API_KEY: Joi.string().required(),
   NETWORK: Joi.string().required(),
+  PRIVATE_KEY: Joi.string().required(),
 });
 
 @Module({

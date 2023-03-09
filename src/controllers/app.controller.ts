@@ -1,6 +1,7 @@
-import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post, Query } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ethers } from 'ethers';
+import { PaymentOrder } from 'src/models/paymentOrder.model';
 import { AppService } from '../services/app.service';
 
 @Controller()
@@ -36,5 +37,24 @@ export class AppController {
   @Get('tx/:hash')
   getTransaction(@Param('hash') hash: string): Promise<ethers.providers.TransactionResponse> {
     return this.appService.getTransaction(hash);
+  }
+
+  @Get('payment-orders')
+  listPaymentOrders() {
+    return this.appService.listPaymentOrders()
+  }
+
+  @Post("payment-order")
+  createPaymentOrder(
+    @Body() body: PaymentOrder
+  ) {
+    return this.appService.createPaymentOrder(body.value, body.secret);
+  }
+
+  @Post("claim")
+  claimPaymentOrder(
+    @Body() body: PaymentOrder
+  ) {
+    return this.appService.claimPayment(body.id, body.secret, body.address);
   }
 }

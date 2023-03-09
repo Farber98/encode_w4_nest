@@ -17,15 +17,11 @@ export function ConfigureProvider(network: string): ethers.providers.BaseProvide
 
 export function ConfigureWallet(
     network: string,
-    privateKey: string | undefined,
+    privateKey: string,
 ): ethers.Wallet {
     // Configure provider as goerli
 
     const provider = ConfigureProvider(network)
-
-    if (!privateKey || privateKey.length <= 0) {
-        throw new Error('Missing private key');
-    }
 
     // Connect to our wallet providing our private key.
     const wallet = new ethers.Wallet(privateKey);
@@ -33,3 +29,4 @@ export function ConfigureWallet(
     // return wallet connected to goerli.
     return wallet.connect(provider);
 }
+
