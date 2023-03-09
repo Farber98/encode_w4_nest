@@ -20,3 +20,12 @@ Querying a deployed contract through Nest.js
   - Create a payment order using secret
   - Request a payment order by passing id and secret
     - Contract is called using an address with the role of minter to pay out the tokens
+
+# Interact
+
+Run server
+```
+yarn start
+```
+
+Go to localhost:3000/api to see OpenAPI spec and interact through swagger.
